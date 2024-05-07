@@ -77,16 +77,15 @@ export default function Category() {
   return (
     <>
       <Typography variant="h5" my={3}>
-        CATEGORY
+        DISCOVER
       </Typography>
 
       <Divider />
-      <Stack flexDirection="row" width="100%" justifyContent="space-between">
+      <Stack flexDirection="column" width="100%" justifyContent="space-between">
         <Stack minWidth="150px" width={{ xs: "10%" }}>
           {/* Genres-------- */}
           <Box>
             <ListItemButton
-              alignItems="flex-start"
               onClick={() => setOpenGenres(!openGenres)}
               sx={{
                 pr: 2,

@@ -9,10 +9,11 @@ import Stack from "@mui/material/Stack";
 import RecommendIcon from "@mui/icons-material/Recommend";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link } from "react-router-dom";
+import "../App.css";
 
 function MovieCard({ item }) {
   return (
-    <Card className="card" sx={{ width: 200, borderRadius: "3px" }}>
+    <Card className="card" sx={{ width: 320, borderRadius: "10px" }}>
       <CardActionArea LinkComponent={Link} to={`/movie/${item.id}`}>
         <Box
           display="flex"
@@ -40,7 +41,12 @@ function MovieCard({ item }) {
                   },
                 ]}
               >
-                <Typography gutterBottom variant="body1" component="div">
+                <Typography
+                  gutterBottom
+                  variant="body1"
+                  component="div"
+                  color={"white"}
+                >
                   {`${
                     item.original_title
                       ? item.original_title
@@ -59,7 +65,7 @@ function MovieCard({ item }) {
                       className="recommend_icon"
                       fontSize="small"
                     />
-                    <Typography variant="subtitle2" ml={1}>
+                    <Typography variant="subtitle2" ml={1} color={"white"}>
                       {`${item.vote_average}`}
                     </Typography>
                   </Box>
@@ -69,7 +75,7 @@ function MovieCard({ item }) {
                     justifyContent="center"
                   >
                     <FavoriteIcon className="favorite_icon" fontSize="small" />
-                    <Typography variant="subtitle2" ml={1}>
+                    <Typography variant="subtitle2" ml={1} color={"white"}>
                       {`${item.vote_count}`}
                     </Typography>
                   </Box>

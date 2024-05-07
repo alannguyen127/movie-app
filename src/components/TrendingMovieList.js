@@ -7,18 +7,18 @@ import PaginationItem from "@mui/material/PaginationItem";
 import Divider from "@mui/material/Divider";
 import Skeleton from "@mui/material/Skeleton";
 
-function MovieList({ products, loading, cutInitial }) {
+function TrendingMovieList({ trendingMovies, loading, cutInitial }) {
   const [cutList, setCutList] = useState();
   const [copiedList, setcopiedList] = useState([]);
 
   function handleList() {
     let y;
     if (copiedList.length === 0) {
-      setcopiedList([...products]);
-      y = [...products].slice(0, 4);
+      setcopiedList([...trendingMovies]);
+      y = [...trendingMovies].slice(0, 4);
       copiedList.splice(0, 4);
     } else if (copiedList.length === 4) {
-      setcopiedList([...products]);
+      setcopiedList([...trendingMovies]);
       y = copiedList.splice(0, 4);
     } else {
       y = copiedList.splice(4, 4);
@@ -69,4 +69,4 @@ function MovieList({ products, loading, cutInitial }) {
   );
 }
 
-export default MovieList;
+export default TrendingMovieList;

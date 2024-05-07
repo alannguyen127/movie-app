@@ -1,6 +1,6 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Box } from "@mui/material";
-import logoImg from "../movie-logo.jpg";
+import logoImg from "../logo.png";
 
 function Logo({ disabledLink = false, sx }) {
   const logo = (
