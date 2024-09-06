@@ -13,7 +13,7 @@ import "../App.css";
 
 function MovieCard({ item }) {
   return (
-    <Card className="card" sx={{ width: 320, borderRadius: "10px" }}>
+    <Card className="card" sx={{ width: "100%", borderRadius: "10px" }}>
       <CardActionArea LinkComponent={Link} to={`/movie/${item.id}`}>
         <Box
           display="flex"
@@ -24,9 +24,10 @@ function MovieCard({ item }) {
               backgroundImage: `url(https://image.tmdb.org/t/p/original/${item.poster_path})`,
               backgroundRepeat: "no-repeat",
               backgroundSize: "cover",
-              height: "300px",
+              backgroundPosition: "center",
             },
           ]}
+          style={{ aspectRatio: "9/16" }}
         >
           <Paper className="content">
             <CardContent>

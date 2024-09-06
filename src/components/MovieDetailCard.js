@@ -117,7 +117,7 @@ function MDetailCard({ movieDetail, loading }) {
                   size="large"
                   children={<StarIcon fontSize="large" />}
                   sx={{
-                    backgroundColor: "rgba(225,0,0,0.9)",
+                    backgroundColor: "white",
                     marginRight: "30px",
                   }}
                 />
@@ -142,6 +142,7 @@ function MDetailCard({ movieDetail, loading }) {
               my={{ xs: 2, md: 1 }}
               flexDirection="row"
               alignItems="center"
+              gap={1}
             >
               <Typography mr={1} variant="caption">
                 Genres
@@ -160,6 +161,7 @@ function MDetailCard({ movieDetail, loading }) {
               flexDirection="row"
               alignItems="center"
               flexWrap="wrap"
+              gap={1}
             >
               <Typography mr={1} variant="caption">
                 Companies
@@ -176,7 +178,7 @@ function MDetailCard({ movieDetail, loading }) {
                       />
                     }
                     label={`${item.name}`}
-                    size="small"
+                    size="medium"
                     variant="filled"
                   />
                 ))}
@@ -203,13 +205,21 @@ function MDetailCard({ movieDetail, loading }) {
                 justifyContent="center"
                 mr={3}
               >
-                <RecommendIcon className="recommend_icon" fontSize="small" />
+                <RecommendIcon
+                  className="recommend_icon"
+                  fontSize="small"
+                  color="info"
+                />
                 <Typography variant="subtitle2" ml={1}>
                   {`${movieDetail.vote_count}`}
                 </Typography>
               </Box>
               <Box display="flex" flexDirection="row" justifyContent="center">
-                <FavoriteIcon className="favorite_icon" fontSize="small" />
+                <FavoriteIcon
+                  className="favorite_icon"
+                  fontSize="small"
+                  color="error"
+                />
                 <Typography variant="subtitle2" ml={1}>
                   {`${movieDetail.vote_average}`}
                 </Typography>

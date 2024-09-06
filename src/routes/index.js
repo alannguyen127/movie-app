@@ -4,7 +4,7 @@ import MainLayout from "../layouts/MainLayout";
 import Homepage from "../pages/HomePage";
 import Discovery from "../pages/Discovery";
 import LoginPage from "../pages/LoginPage";
-import MovieDetailCard from "../components/MovieDetailCard";
+import DetailPage from "../pages/DetailPage";
 import FavoritePage from "../pages/Favorite";
 import NotFoundPage from "../pages/NotFoundPage";
 import { useAuth } from "../contexts/AuthContext";
@@ -31,7 +31,7 @@ function Router() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Homepage />} />
           <Route path="discovery/:pageId" element={<Discovery />} />
-          <Route path="/movie/:movieId" element={<MovieDetailCard />} />
+          <Route path="/movie/:movieId" element={<DetailPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route

@@ -81,7 +81,12 @@ export default function Category() {
       </Typography>
 
       <Divider />
-      <Stack flexDirection="column" width="100%" justifyContent="space-between">
+      <Stack
+        flexDirection="row"
+        width="100%"
+        justifyContent="space-between"
+        gap={5}
+      >
         <Stack minWidth="150px" width={{ xs: "10%" }}>
           {/* Genres-------- */}
           <Box>
