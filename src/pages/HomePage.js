@@ -4,16 +4,18 @@ import TrendingMovieList from "../components/TrendingMovieList";
 
 import apiService from "../app/apiService";
 import { API_KEY } from "../app/config";
-
 import Grid from "@mui/material/Grid";
 import Category from "../components/Category";
+import MovieResultList from "../components/MovieResultList";
+import { useSearch } from "../contexts/SearchContext";
 
 function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [cutInitial, setcutInitial] = useState();
-
+  const { results } = useSearch();
+  // console.log("log from HomePage", results);
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -34,7 +36,9 @@ function HomePage() {
     getData();
   }, []);
 
-  return (
+  return results.length > 0 ? (
+    <MovieResultList results={results} />
+  ) : (
     <>
       <Grid
         container
@@ -44,6 +48,9 @@ function HomePage() {
           minHeight: "100vh",
         }}
       >
+        <Grid item direction="column" container>
+          <MovieResultList />
+        </Grid>
         <Grid item direction="column" container>
           <TrendingMovieList
             trendingMovies={trendingMovies}

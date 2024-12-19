@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+// import apiService from "../api/apiService";
+// import { API_KEY } from "../api/config";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
@@ -11,39 +13,47 @@ import { useParams } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
+// import VideoPlayer from "./VideoPlayer";
 
 function MDetailCard({ movieDetail, loading }) {
-  const { movieId } = useParams();
-  const [movieError, setMovieError] = useState(null);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    // Check if the movie is already in the favorites list
-    const favList = JSON.parse(localStorage.getItem("fav")) || [];
-    const isFav = favList.some((movie) => movie.id === movieId);
-    setIsFavorite(isFav);
-  }, [movieId]);
+  let { movieId } = useParams();
+  const [movieError, setmovieError] = useState();
 
   const addFavMovie = (title, poster, voteA, voteC, id) => {
-    let list = JSON.parse(localStorage.getItem("fav")) || [];
-    const isAlreadyAdded = list.some((movie) => movie.id === id);
+    let list = JSON.parse(localStorage.getItem("fav"));
+    if (list) {
+      let itemId;
+      for (let i = 0; i < list.length; i++) {
+        itemId = list[i].movie.id;
+      }
+      if (itemId.includes(movieId)) {
+        setmovieError("You had this item!");
+      } else {
+        list.push({
+          id: id,
+          original_title: title,
+          poster_path: poster,
+          vote_average: voteA,
+          vote_count: voteC,
+        });
 
-    if (isAlreadyAdded) {
-      setMovieError("This movie is already in your favorite gallery!");
+        localStorage.setItem("fav", JSON.stringify(list));
+        setmovieError("Added!");
+      }
     } else {
+      localStorage.setItem("fav", JSON.stringify([]));
+      list = JSON.parse(localStorage.getItem("fav"));
       list.push({
-        id,
+        id: id,
         original_title: title,
         poster_path: poster,
         vote_average: voteA,
         vote_count: voteC,
       });
       localStorage.setItem("fav", JSON.stringify(list));
-      setMovieError("Added to your favorite gallery!");
-      setIsFavorite(true); // Update the favorite state
+      setmovieError("Added!");
     }
   };
-
   const detailSkeleton = (
     <Stack spacing={1}>
       <Skeleton variant="text" />
@@ -51,7 +61,6 @@ function MDetailCard({ movieDetail, loading }) {
       <Skeleton variant="rectangular" width="100%" height={300} />
     </Stack>
   );
-
   return (
     <>
       {loading ? (
@@ -91,7 +100,7 @@ function MDetailCard({ movieDetail, loading }) {
               alignItems="center"
               flexDirection="row"
             >
-              <Typography mb={1} variant="h4">
+              <Typography mb={1} variant="h6">
                 {`${movieDetail.original_title}`}
               </Typography>
               <Stack flexDirection="column" alignItems="end">
@@ -106,14 +115,7 @@ function MDetailCard({ movieDetail, loading }) {
                     )
                   }
                   size="large"
-                  children={
-                    <StarIcon
-                      fontSize="large"
-                      sx={{
-                        color: isFavorite ? "gold" : "gray",
-                      }}
-                    />
-                  }
+                  children={<StarIcon fontSize="large" />}
                   sx={{
                     backgroundColor: "white",
                     marginRight: "30px",
@@ -222,6 +224,11 @@ function MDetailCard({ movieDetail, loading }) {
                   {`${movieDetail.vote_average}`}
                 </Typography>
               </Box>
+              <Stack>
+                {/* {movieDetail.videos.results?.map((item) => (
+                  <VideoPlayer linkKey={item.key} />
+                ))} */}
+              </Stack>
             </Stack>
           </Stack>
         </Stack>

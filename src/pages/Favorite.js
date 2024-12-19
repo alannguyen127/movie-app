@@ -13,7 +13,7 @@ function FavoritePage() {
 
   return (
     <>
-      <Typography variant="h5" mb={2}>
+      <Typography variant="h5" mb={2} mt={2}>
         YOUR FAVORITES
       </Typography>
       <Divider />

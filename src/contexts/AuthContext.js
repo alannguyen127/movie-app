@@ -1,107 +1,30 @@
-import { createContext, useReducer, useEffect, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const initialState = {
-  isAuthenticated: false,
-  isInitialized: false,
-  user: null,
-};
+const AuthContext = createContext();
 
-const INITIALIZE = "INITIALIZE";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGOUT = "LOGOUT";
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case INITIALIZE:
-      const { isAuthenticated, user } = action.payload;
-      return {
-        ...state,
-        isAuthenticated,
-        isInitialized: true,
-        user,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload.user,
-      };
-    case LOGOUT:
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
-    default:
-      return state;
-  }
-};
-
-const AuthContext = createContext({ ...initialState });
-
-function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    const initialize = async () => {
-      try {
-        const username = window.localStorage.getItem("username");
-
-        if (username) {
-          dispatch({
-            type: INITIALIZE,
-            payload: { isAuthenticated: true, user: { username } },
-          });
-        } else {
-          dispatch({
-            type: INITIALIZE,
-            payload: { isAuthenticated: false, user: null },
-          });
-        }
-      } catch (err) {
-        console.error(err);
-        dispatch({
-          type: INITIALIZE,
-          payload: {
-            isAuthenticated: false,
-            user: null,
-          },
-        });
-      }
-    };
-    initialize();
-  }, []);
-
-  const login = async (username, callback) => {
-    window.localStorage.setItem("username", username);
-    dispatch({
-      type: LOGIN_SUCCESS,
-      payload: { user: { username } },
-    });
-    callback();
-  };
-
-  const logout = async (callback) => {
-    window.localStorage.removeItem("username");
-    dispatch({ type: LOGOUT });
-    callback();
+  const auth = {
+    signin: (email, callback) => {
+      // Implement signin logic here
+      setUser({ email });
+      callback();
+    },
+    signout: (callback) => {
+      setUser(null);
+      callback();
+    },
+    user: user?.email,
   };
 
   return (
-    <AuthContext.Provider
-      value={{
-        ...state,
-        login,
-        logout,
-      }}
-    >
+    <AuthContext.Provider value={{ user, auth }}>
       {children}
     </AuthContext.Provider>
   );
-}
+};
 
-export { AuthContext, AuthProvider };
-
-export function useAuth() {
+export const useAuth = () => {
   return useContext(AuthContext);
-}
+};

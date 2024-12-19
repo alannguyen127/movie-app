@@ -12,12 +12,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Skeleton from "@mui/material/Skeleton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 const yearList = [
-  { id: 1999, label: "1999" },
-  { id: 1998, label: "1998" },
-  { id: 1997, label: "1997" },
-  { id: 1996, label: "1996" },
-  { id: 2009, label: "2009" },
-  { id: 2000, label: "2000" },
+  { id: 2018, label: "2018" },
+  { id: 2019, label: "2019" },
+  { id: 2020, label: "2020" },
+  { id: 2021, label: "2021" },
+  { id: 2022, label: "2022" },
+  { id: 2023, label: "2023" },
+  { id: 2024, label: "2024" },
 ];
 export default function Category() {
   const [openYear, setOpenYear] = React.useState(false);
@@ -98,7 +99,7 @@ export default function Category() {
                 pb: openGenres ? 0 : 2.5,
 
                 "&:hover, &:focus": {
-                  "& svg": { opacity: openGenres ? 1 : 0 },
+                  "& svg": { opacity: 1 },
                 },
               }}
             >
@@ -163,7 +164,7 @@ export default function Category() {
                 pt: 2.5,
                 pb: openYear ? 0 : 2.5,
                 "&:hover, &:focus": {
-                  "& svg": { opacity: openYear ? 1 : 0 },
+                  "& svg": { opacity: 1 },
                 },
               }}
             >

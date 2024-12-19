@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import apiService from "../app/apiService";
+import { API_KEY, BASE_URL } from "../app/config";
+import { useSearch } from "../contexts/SearchContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -42,15 +45,50 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-function MovieSearchBar() {
+function MovieSearchBar({ onResults }) {
+  const [query, setQuery] = useState("");
+
+  const { setResults, setIsSearching } = useSearch();
+
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (value.length > 2) {
+      setLoading(true);
+      setIsSearching(true);
+      try {
+        const response = await fetch(
+          `${BASE_URL}search/movie?query=${value}&api_key=${API_KEY}`
+        );
+        const data = await response.json();
+        onResults(data.results || []);
+        // console.log(results);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (value.length === 0) {
+      onResults([]);
+      setIsSearching(false);
+    }
+  };
+
   return (
     <Search>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder="Search…"
+        placeholder="Search Movies..."
         inputProps={{ "aria-label": "search" }}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleSearch}
+        fullWidth
       />
     </Search>
   );

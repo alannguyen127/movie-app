@@ -3,10 +3,10 @@ import { Box, Container, Stack } from "@mui/material";
 import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
 
-function MainLayout() {
+function MainLayout({ onResults }) {
   return (
     <Stack sx={{ minHeight: "100vh" }}>
-      <MainHeader />
+      <MainHeader onResults={onResults} />
       <Container>
         <Outlet />
       </Container>
