@@ -5,17 +5,16 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import MovieDetailCard from "../components/MovieDetailCard";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 
 function MovieItemPage() {
   // let location = useLocation();
-  let auth = useAuth();
+
   // console.log(auth.user);
   let { movieId } = useParams();
   const [loading, setLoading] = useState();
   const [movieDetail, setMovieDetail] = useState(null);
   useEffect(() => {
-    console.log("Movie ID", movieId);
+    // console.log("Movie ID", movieId);
     const fetchData = async () => {
       try {
         setLoading(true);

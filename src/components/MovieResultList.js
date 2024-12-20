@@ -5,7 +5,7 @@ import MovieCard from "./MovieCard";
 import { useSearch } from "../contexts/SearchContext";
 import { Box } from "@mui/material";
 
-function MovieResultList({}) {
+function MovieResultList() {
   const { results, isSearching } = useSearch();
   if (!isSearching) return null;
 
