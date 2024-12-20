@@ -41,7 +41,7 @@ function TrendingMovieList({ trendingMovies, loading, cutInitial }) {
     setCutList(() =>
       [...trendingMovies].slice(limit * page, limit * (page + 1))
     );
-    console.log([...trendingMovies].slice(limit * page, limit * (page + 1)));
+    // console.log([...trendingMovies].slice(limit * page, limit * (page + 1)));
   }, [page, trendingMovies]);
 
   // if (copiedList.length === 0) {

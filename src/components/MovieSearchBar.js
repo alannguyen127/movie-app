@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
-import apiService from "../app/apiService";
 import { API_KEY, BASE_URL } from "../app/config";
 import { useSearch } from "../contexts/SearchContext";
 
@@ -48,16 +47,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function MovieSearchBar({ onResults }) {
   const [query, setQuery] = useState("");
 
-  const { setResults, setIsSearching } = useSearch();
+  const { setIsSearching } = useSearch();
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const handleSearch = async (e) => {
     const value = e.target.value;
     setQuery(value);
+    console.log(query);
 
     if (value.length > 2) {
-      setLoading(true);
+      // setLoading(true);
       setIsSearching(true);
       try {
         const response = await fetch(
@@ -68,9 +68,10 @@ function MovieSearchBar({ onResults }) {
         // console.log(results);
       } catch (error) {
         console.error("Error fetching movies:", error);
-      } finally {
-        setLoading(false);
       }
+      // finally {
+      //   setLoading(false);
+      // }
     }
     if (value.length === 0) {
       onResults([]);

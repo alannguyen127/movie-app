@@ -12,10 +12,10 @@ import { useSearch } from "../contexts/SearchContext";
 function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [cutInitial, setcutInitial] = useState();
   const { results } = useSearch();
-  // console.log("log from HomePage", results);
+
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -26,10 +26,9 @@ function HomePage() {
         const result = res.data.results;
         setTrendingMovies(result);
         setcutInitial([...result].splice(16, 4));
-        setError("");
+        // setError("");
       } catch (error) {
-        console.log(error);
-        setError(error.message);
+        console.log(error.message);
       }
       setLoading(false);
     };

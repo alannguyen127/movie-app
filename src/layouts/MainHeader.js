@@ -14,7 +14,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import StarIcon from "@mui/icons-material/Star";
-function MainHeader({}) {
+
+function MainHeader() {
   let location = useLocation();
   const { auth } = useAuth();
   const { setResults } = useSearch();

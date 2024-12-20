@@ -10,7 +10,7 @@ import { useAuth } from "../contexts/AuthContext";
 function MovieItemPage() {
   // let location = useLocation();
   let auth = useAuth();
-  console.log(auth.user);
+  // console.log(auth.user);
   let { movieId } = useParams();
   const [loading, setLoading] = useState();
   const [movieDetail, setMovieDetail] = useState(null);
@@ -22,7 +22,7 @@ function MovieItemPage() {
         const res = await apiService.get(
           `movie/${movieId}?api_key=${API_KEY}&language=en-US&append_to_response=videos`
         );
-        console.log("Data", res.data);
+        // console.log("Data", res.data);
         setMovieDetail(res.data);
         setLoading(false);
       } catch (e) {
